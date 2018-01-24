@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-import csv
+import pickle
 
-FILENAME = "trips.csv"
+FILENAME = "trips.bin"
 
 def get_miles_driven():
     while True:
@@ -22,16 +22,13 @@ def get_gallons_used():
             continue
 
 def write_trips(trips):
-    with open(FILENAME, "w", newline="") as file:
-        writer = csv.writer(file)
-        writer.writerows(trips)
+    with open(FILENAME, "wb") as file:
+        pickle.dump(trips, file)
 
 def read_trips():
     trips = []
-    with open(FILENAME, "r") as file:
-        reader = csv.reader(file)
-        for row in reader:
-            trips.append(row)
+    with open(FILENAME, "rb") as file:
+        trips = pickle.load(file)
         
     return trips
 

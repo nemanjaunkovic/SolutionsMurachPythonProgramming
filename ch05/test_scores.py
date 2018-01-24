@@ -15,8 +15,11 @@ test_score = 0
 while True:
     test_score = input("Enter test score (or 'x' to quit): ")
     if test_score != "x":
-        test_score = int(test_score)
-        counter += 1
+        if(test_score.isdigit()):
+            test_score = int(test_score)
+        else:
+            print("You have entered invalid value. Please try again")
+            continue
     else:
         break
     if test_score >= 0 and test_score <= 100:
@@ -26,12 +29,15 @@ while True:
         print("Test score must be from 0 through 100. Score discarded. Try again.")   
 
 # calculate average score
-average_score = round(score_total / counter)
+if(counter > 0):
+    average_score = round(score_total / counter)
                 
-# format and display the result
-print("======================")
-print("Total Score:", score_total,
-      "\nAverage Score:", average_score)
+    # format and display the result
+    print("======================")
+    print("Total Score:", score_total,
+          "\nAverage Score:", average_score)
+else:
+    print("You have not entered any results")
 print()
 print("Bye")
 
